@@ -1,32 +1,25 @@
-/**
- * Twitterのアナリティクスの数値をコピーするボタンを追加する
- */
-function createButton() {
-  const copyButton = document.createElement('button');
-  copyButton.innerText = "数値をコピーする";
-  copyButton.style.position = 'fixed';
-  copyButton.style.top = '10px';
-  copyButton.style.right = '10px';
-  copyButton.style.zIndex = '9999';
-  copyButton.addEventListener('click', function() {
-    const data = getAnalyticsData();
-    navigator.clipboard.writeText(data)
-      .then(() => {
-        console.log('Data copied to clipboard successfully!');
-        alert('数値をコピーしました');
-      })
-      .catch(err => {
-        console.error('Could not copy data to clipboard:', err);
-      });
-  });
-  return copyButton;
-}
+const copyButton = document.createElement('button');
+copyButton.innerText = "数値をコピーする";
+copyButton.style.position = 'fixed';
+copyButton.style.top = '10px';
+copyButton.style.right = '10px';
+copyButton.style.zIndex = '9999';
+copyButton.addEventListener('click', function() {
+  const data = getAnalyticsData();
+  navigator.clipboard.writeText(data)
+    .then(() => {
+      console.log('Data copied to clipboard successfully!');
+      alert('数値をコピーしました');
+    })
+    .catch(err => {
+      console.error('Could not copy data to clipboard:', err);
+    });
+});
 
 /**
  * ボタンを表示するかどうかを判定して表示する
  */
 function checkAndDisplayButton() {
-  copyButton = createButton();
   if (window.location.href.includes("https://twitter.com/i/account_analytics")) {
     if (!document.body.contains(copyButton)) {
       document.body.appendChild(copyButton);
@@ -55,7 +48,8 @@ checkAndDisplayButton();
 
 
 /**
- * XPathで指定した要素のテキストを取得する
+ * XPathで
+ * 定した要素のテキストを取得する
  * @param {string} xpath XPath
  * @param {HTMLElement} context XPathの検索範囲
  * @returns {string} テキスト
